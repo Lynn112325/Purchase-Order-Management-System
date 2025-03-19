@@ -1,0 +1,162 @@
+body {
+    height: 100vh;
+}
+
+.header {
+    height: 10vh;
+}
+
+.toast {
+    z-index: 10;
+}
+
+
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 60px;
+    }
+    .links_name {
+        display: none;
+    }
+    .list-group-item {
+        justify-content: center;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+}
+
+.dropdown .dropdown-menu {
+    font-size: 0.85rem;
+}
+
+.main {
+    height: 85vh;
+    padding: 10px;
+    /* position: fixed; */
+    border-radius: 5px;
+    width: 100%;
+    /* top: 55%; */
+    /* left: 50%; */
+    /* transform: translate(-50%, -50%); */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+    /* Optional styles for the navbar */
+}
+
+.login.form-box {
+    display: flex;
+    position: fixed;
+    top: 60%;
+    left: 50%;
+    max-width: 720px;
+    transform: translate(-50%, -70%);
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.list-group-item.active {
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+    color: #212529;
+    font-weight: 500;
+}
+
+.message {
+    display: flex;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+}
+
+.form-box .form-content {
+    padding: 35px;
+}
+
+.form-box h2 {
+    text-align: center;
+    margin-bottom: 29px;
+}
+
+#loginform .input-field, #loginform button {
+    position: relative;
+    height: 50px;
+    margin-top: 20px;
+}
+
+.input-field input {
+    height: 100%;
+    background: none;
+    outline: none;
+    font-size: 0.95rem;
+    padding: 0 15px;
+    border: 1px solid rgb(71, 79, 86);
+    border-radius: 3px;
+    width: 100%;
+}
+
+.input-field input:focus {
+    border: 1px solid rgb(35, 35, 35);
+}
+
+.input-field label {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    transition: 0.2s ease;
+    color: #212529;
+}
+
+.input-field input:is(:focus, :valid) {
+    padding: 16px 15px 0;
+}
+
+.input-field input:is(:focus, :valid)~label {
+    transform: translateY(-120%);
+    color: rgb(59, 59, 59);
+    font-size: 0.75rem;
+}
+
+@media (max-width: 768px) {
+    .form-box {
+        width: 95%;
+    }
+    .form-box .form-content {
+        padding: 30px 20px;
+    }
+    .navbar-brand {
+      font-size: 0.9rem; /* Smaller text on mobile */
+    }
+    .dropdown-toggle span {
+      font-size: 0.8rem; /* Smaller dropdown text */
+    }
+    .sidebar {
+        width: 60px;
+    }
+    .links_name {
+        display: none;
+    }
+    /* Hover effect */
+    .list-group-item:hover {
+        width: 200px;
+    }
+    /* Show links_name on hover */
+    .list-group-item:hover .links_name {
+        display: block; /* Show the link name */
+        white-space: nowrap; /* Prevent text wrapping */
+    }
+    .list-group-item {
+        justify-content: center;
+    }
+}
