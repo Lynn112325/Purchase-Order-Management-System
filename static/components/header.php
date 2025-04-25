@@ -10,7 +10,7 @@ function render_header()
                     <!-- Nav Item - User Information -->
                     <div class="dropdown me-2 w-auto">
                         <button class="dropdown-toggle btn btn-outline-dark" href="#" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span>' . $_SESSION['username'] . ' | ' . $_SESSION['role'] . '</span>
+                        <span>' . $_SESSION['username'] . ', ' . $_SESSION['role'] . '</span>
                         </button>
 
                         <!-- Dropdown - User Information -->

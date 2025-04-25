@@ -37,7 +37,7 @@ function render_sidebar()
     );
 
     echo '<div class="col-2">
-            <div class="sidebar list-group align-items-center">';
+            <div class="sidebar list-group align-items-center shadow-sm">';
 
     foreach ($sidebar as $item) {
 

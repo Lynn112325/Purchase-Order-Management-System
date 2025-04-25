@@ -1,5 +1,5 @@
 body {
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 .header {
@@ -36,7 +36,8 @@ body {
 }
 
 .main {
-    height: 85vh;
+    display: flexbox;
+    min-height: 85vh;
     padding: 10px;
     /* position: fixed; */
     border-radius: 5px;
