@@ -1,16 +1,24 @@
 // Purpose: To handle the selection of target restaurant
 // display the type and address of the selected restaurant
 let inventory = []; // Initialize inventory variable
+let category = "all"; // Initialize category variable
 
-document.getElementById("restaurant").addEventListener("change", function () {
-    const selectedOption = this.options[this.selectedIndex];
-    const type = selectedOption.getAttribute("data-type");
-    const address = selectedOption.getAttribute("data-address");
-    document.getElementById("type").value = type || "";
-    document.getElementById("address").value = address || "";
+document.getElementById("target-restaurant").addEventListener("change", function () {
+    const selectedRestaurant = this.options[this.selectedIndex];
+    const restaurantType = selectedRestaurant.getAttribute("data-type");
+    const restaurantAddress = selectedRestaurant.getAttribute("data-address");
+    document.getElementById("type").value = restaurantType;
+    document.getElementById("address").value = restaurantAddress;
 });
 
 async function loadInventory(restaurantId) {
+
+    if (!isValidRestaurantSelected()) {
+        // alert("Please select a valid restaurant.");
+        showToast("Please select a valid restaurant.", "danger");
+        return;
+    }
+
     const inventoryTbody = document.getElementById("inventory");
     try {
         // const response = await fetch(`/inventory/${restaurantId}`);
@@ -20,7 +28,7 @@ async function loadInventory(restaurantId) {
             method: "GET",
         });
 
-        // 顯示載入中狀態
+        // display loading spinner while fetching data
         inventoryTbody.innerHTML =
             '<tr><td colspan="7" class="text-center"><div class="spinner-border" role="status"></div></td></tr>';
 
@@ -31,7 +39,7 @@ async function loadInventory(restaurantId) {
 
             // console.log("inventory: ", inventory);
 
-            updateInventoryDisplay();
+            updateInventoryDisplay(category);
         }
     } catch (error) {
         inventoryTbody.innerHTML =
@@ -41,7 +49,10 @@ async function loadInventory(restaurantId) {
     }
 }
 
-function updateInventoryDisplay(categoryName = 'all') {
+// Function to handle inventory display based on selected category
+function updateInventoryDisplay(categoryName) {
+
+    category = categoryName; // Update the global category variable
     const inventoryTbody = document.getElementById("inventory");
     inventoryTbody.innerHTML = "";
 
@@ -50,20 +61,28 @@ function updateInventoryDisplay(categoryName = 'all') {
         showErrorModal(error.message);
     }
 
+    let isValidAddToCart = "disabled";
+
+    // is valid add-to-cart button
+    if ($(".breadcrumb .active").hasClass("step2") ) {
+        isValidAddToCart = "";
+    }
+
     inventory.forEach((item) => {
-        if (categoryName !== item.categoryName && categoryName !== 'all') {
+        if (categoryName !== item.categoryName && categoryName !== "all") {
             return; // Skip items that don't match the selected category
         }
         const row = document.createElement("tr");
-        row.innerHTML = `
-            <td>${item.itemId}</td>
+        row.innerHTML = `<td>${item.itemId}</td>
             <td>${item.itemName}</td><td>
-            <img src="static/image/${item.imgUrl}" alt="Item Image" style="max-width: 60px; height: auto;">
+            <img src="static/image/${item.imgUrl
+            }" alt="Item Image" style="max-width: 60px; height: auto;">
             <td>${item.specifications ?? "--"}</td>
             <td>${item.stock}</td>
-            <td>
-                <button class="btn inventory-form btn-primary" disabled onclick="addToCart(${item.itemId
-            })"><i class='bx bx-cart-add'></i></button>
+            <td >
+                <button class="btn add-to-cart btn-primary" ${isValidAddToCart} onclick="addToCart('${item.itemId}')">
+                    <i class='bx bx-cart-add'></i>
+                </button>
             </td>
         `;
         inventoryTbody.appendChild(row);

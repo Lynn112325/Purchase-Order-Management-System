@@ -6,12 +6,6 @@ body {
     height: 10vh;
 }
 
-.toast {
-    z-index: 10;
-}
-
-
-
 @media (max-width: 768px) {
     .sidebar {
         width: 60px;
@@ -22,6 +16,20 @@ body {
     .list-group-item {
         justify-content: center;
     }
+}
+
+#toast-container {
+    position: fixed;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99999;
+    gap: 10px;
+}
+
+.toast.show {
+    opacity: 1 !important;
+    visibility: visible;
 }
 
 * {
